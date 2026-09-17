@@ -1,6 +1,6 @@
 /* ==========================================================================
-   Theme tokens — three switchable style directions.
-   Toggle via [data-theme="classical" | "warm" | "minimalist"] on <html>.
+   Theme tokens — four switchable style directions.
+   Toggle via [data-theme="classical" | "warm" | "minimalist" | "dark"] on <html>.
    ========================================================================== */
 
 :root,
@@ -66,6 +66,52 @@
   --rule: 1px solid var(--card-border);
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
+
+/* Dark Gold: the Elegant Classical palette inverted — near-black navy, ivory text, gold accents */
+[data-theme="dark"] {
+  --bg: #0c1120;
+  --bg-alt: #141a2c;
+  --ink: #f3ecd9;
+  --ink-dim: #a9adbb;
+  --accent: #c9a24b;
+  --accent-2: #e2c77d;
+  --accent-soft: #2a2416;
+  --card-border: #283048;
+  --grad: linear-gradient(120deg, #c9a24b 0%, #f0dc9a 100%);
+  --hero-bg: #070b15;
+  --hero-ink: #f3ecd9;
+  --hero-dim: #b5b8c6;
+  --font-head: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --radius: 14px;
+  --radius-lg: 24px;
+  --rule: 1px solid var(--card-border);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Gold fills need dark text, not white */
+[data-theme="dark"] .btn-primary,
+[data-theme="dark"] .brand-mark,
+[data-theme="dark"] .step-num,
+[data-theme="dark"] .avatar,
+[data-theme="dark"] .theme-switcher button[aria-pressed="true"] {
+  color: var(--bg) !important;
+}
+
+[data-theme="dark"] .cta-band {
+  background: linear-gradient(120deg, #3a1024 0%, #141a2c 100%);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+[data-theme="dark"] .cta-band h2 { color: var(--accent-2); }
+
+[data-theme="dark"] .cta-band .btn-primary {
+  background: var(--accent);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+[data-theme="dark"] .qr-card { color: #0f1729; }
+[data-theme="dark"] .qr-card p { color: #4a4f63; }
 
 /* ==========================================================================
    Base

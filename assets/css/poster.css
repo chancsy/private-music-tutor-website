@@ -23,6 +23,8 @@ html, body {
   background: var(--bg);
   position: relative;
   overflow: hidden;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 /* On screen (not printing) show the page with a shadow + margin so it reads as a page preview */
@@ -167,9 +169,32 @@ html, body {
 [data-theme="classical"] .poster-keys span:nth-child(3n) { background: var(--ink); }
 
 .poster-keys, .poster-doodles, .poster-ruleline { display: none; }
-[data-theme="classical"] .poster-keys { display: flex; }
+[data-theme="classical"] .poster-keys,
+[data-theme="dark"] .poster-keys { display: flex; }
 [data-theme="warm"] .poster-doodles { display: block; }
 [data-theme="minimalist"] .poster-ruleline { display: block; }
+
+/* Dark Gold: same piano-key border, framed in gold; QR keeps a white tile so it scans */
+[data-theme="dark"] .poster-keys {
+  height: 8mm;
+  margin: 0 0 8mm;
+  border: 0.5mm solid var(--accent);
+  border-radius: 1mm;
+  overflow: hidden;
+}
+[data-theme="dark"] .poster-keys span {
+  flex: 1;
+  border-right: 0.3mm solid #0c1120;
+  background: #fff;
+}
+[data-theme="dark"] .poster-keys span:last-child { border-right: none; }
+[data-theme="dark"] .poster-keys span:nth-child(3n) { background: #0c1120; }
+[data-theme="dark"] .poster-name { color: var(--accent-2); }
+[data-theme="dark"] .poster-qr img {
+  background: #fff;
+  padding: 1.5mm;
+  border-radius: 2mm;
+}
 
 /* Warm & Approachable: soft note doodles */
 [data-theme="warm"] .poster-doodles {

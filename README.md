@@ -1,6 +1,6 @@
 # Private Piano Tutor — Website & Poster
 
-A one-page marketing website plus three print-ready poster/flyer variants, built as
+A one-page marketing website plus four print-ready poster/flyer variants, built as
 plain static HTML/CSS/JS (no build step, no framework — just open the files in a browser).
 
 ## What's here
@@ -8,9 +8,10 @@ plain static HTML/CSS/JS (no build step, no framework — just open the files in
 ```
 index.html                          Main website (single page)
 poster/
-  poster-elegant-classical.html     Poster variant 1 — navy/burgundy/gold, serif
-  poster-warm-approachable.html     Poster variant 2 — cream/terracotta/sage, rounded sans
-  poster-modern-minimalist.html     Poster variant 3 — black/white/emerald, geometric sans
+  poster-elegant-classical.html     Poster variant 1 — navy/burgundy/gold on ivory, serif
+  poster-dark-gold.html             Poster variant 2 — gold + ivory on near-black navy, serif
+  poster-warm-approachable.html     Poster variant 3 — cream/terracotta/sage, rounded sans
+  poster-modern-minimalist.html     Poster variant 4 — black/white/emerald, geometric sans
 assets/
   css/styles.css                    Shared theme tokens + website styles
   css/poster.css                    Poster-specific print layout (A4)
@@ -23,16 +24,17 @@ scripts/
 
 ## Picking a style
 
-`index.html` has a floating style switcher (bottom-right: Classical / Warm / Minimal) so you
-can preview all three live in a browser before committing to one. You can also open a specific
-style directly with a URL parameter, e.g. `index.html?theme=warm` — handy for sending someone a
-link to one particular version. Once you've picked a favourite:
+`index.html` has a floating style switcher (bottom-right: Classical / Dark Gold / Warm / Minimal)
+so you can preview all four live in a browser before committing to one. You can also open a
+specific style directly with a URL parameter — `?theme=classical`, `?theme=dark`, `?theme=warm`
+or `?theme=minimalist` — handy for sending someone a link to one particular version. Once
+you've picked a favourite:
 
 - For the **website**, you can just leave the switcher in (it's harmless — hidden on print)
   or change `<html data-theme="...">` in `index.html` to your chosen theme and delete the
   `.theme-switcher` block.
-- For the **poster**, just use whichever of the three `poster/poster-*.html` files matches
-  your chosen style, and ignore/delete the other two.
+- For the **poster**, just use whichever of the four `poster/poster-*.html` files matches
+  your chosen style, and ignore/delete the other three.
 
 ## Filling in real content
 
@@ -91,6 +93,8 @@ then visit `http://localhost:8000`.
 
 1. Open the chosen `poster/poster-*.html` file in a browser.
 2. Print (Ctrl+P / Cmd+P) → destination "Save as PDF" → paper size **A4** → margins **None**.
+   For the Dark Gold poster also tick **Background graphics** (under "More settings"), or the
+   dark page prints as white.
 3. Check the print preview shows one full page with no content cut off before saving.
 
 ## Hosting
