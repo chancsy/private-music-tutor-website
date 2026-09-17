@@ -1,0 +1,189 @@
+/* Poster/flyer layout — designed for A4, single page.
+   Shares theme variables from styles.css; this file only adds poster-specific layout. */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+}
+
+.poster {
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto;
+  padding: 16mm 14mm;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* On screen (not printing) show the page with a shadow + margin so it reads as a page preview */
+@media screen {
+  body {
+    background: #d9d9d9;
+    padding: 24px 0 60px;
+  }
+  .poster {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  }
+}
+
+.poster-eyebrow {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 12pt;
+  color: var(--accent);
+  font-weight: 700;
+  font-family: var(--font-body);
+  margin-bottom: 4mm;
+}
+
+.poster-name {
+  text-align: center;
+  font-family: var(--font-head);
+  font-size: 34pt;
+  margin: 0 0 6mm;
+  color: var(--ink);
+}
+
+.poster-portrait {
+  width: 42mm;
+  height: 42mm;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2mm solid var(--accent-2);
+  margin: 0 auto 6mm;
+}
+
+.poster-tagline {
+  text-align: center;
+  font-size: 13pt;
+  color: var(--ink-dim);
+  max-width: 150mm;
+  margin: 0 auto 8mm;
+}
+
+.poster-credentials {
+  list-style: none;
+  margin: 0 auto 8mm;
+  padding: 0;
+  max-width: 165mm;
+  display: grid;
+  gap: 3mm;
+}
+
+.poster-credentials li {
+  font-size: 12.5pt;
+  padding: 3mm 5mm;
+  background: var(--bg-alt);
+  border: 0.4mm solid var(--card-border);
+  border-radius: var(--radius);
+  display: flex;
+  gap: 3mm;
+}
+
+.poster-credentials .mark {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.poster-spacer {
+  flex: 1;
+}
+
+.poster-contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12mm;
+  border-top: var(--rule);
+  padding-top: 8mm;
+  margin-top: auto;
+}
+
+.poster-contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 3mm;
+  font-size: 13pt;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.poster-qr {
+  text-align: center;
+}
+
+.poster-qr img {
+  width: 34mm;
+  height: 34mm;
+}
+
+.poster-qr p {
+  margin: 2mm 0 0;
+  font-size: 9pt;
+  color: var(--ink-dim);
+}
+
+.poster-print-hint {
+  text-align: center;
+  font-size: 11pt;
+  color: #888;
+  margin: 10px 0 0;
+}
+
+@media print {
+  .poster-print-hint { display: none; }
+}
+
+/* ---- Theme-specific decoration ---- */
+
+/* Elegant Classical: piano-key border along the top */
+[data-theme="classical"] .poster-keys {
+  display: flex;
+  height: 8mm;
+  margin: 0 0 8mm;
+  border: 0.4mm solid var(--ink);
+  border-radius: 1mm;
+  overflow: hidden;
+}
+[data-theme="classical"] .poster-keys span {
+  flex: 1;
+  border-right: 0.3mm solid var(--ink);
+  background: #fff;
+}
+[data-theme="classical"] .poster-keys span:last-child { border-right: none; }
+[data-theme="classical"] .poster-keys span:nth-child(3n) { background: var(--ink); }
+
+.poster-keys, .poster-doodles, .poster-ruleline { display: none; }
+[data-theme="classical"] .poster-keys { display: flex; }
+[data-theme="warm"] .poster-doodles { display: block; }
+[data-theme="minimalist"] .poster-ruleline { display: block; }
+
+/* Warm & Approachable: soft note doodles */
+[data-theme="warm"] .poster-doodles {
+  text-align: center;
+  font-size: 16pt;
+  color: var(--accent-2);
+  letter-spacing: 6mm;
+  margin: 0 0 6mm;
+}
+
+/* Modern Minimalist: single thin rule under the name */
+[data-theme="minimalist"] .poster-ruleline {
+  width: 40mm;
+  height: 0.6mm;
+  background: var(--accent);
+  margin: 0 auto 8mm;
+}
