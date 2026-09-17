@@ -3,86 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>[Studio Name] Piano Studio — Private Piano Lessons</title>
-<meta name="description" content="Private piano lessons with 20 years of teaching experience, ABRSM Grade 8 and ATCL diploma qualified. Book a trial lesson today.">
+<title>[Studio Name] Piano Studio — Piano Lessons</title>
+<meta name="description" content="Piano lessons with 20 years of teaching experience, ABRSM Grade 8 and ATCL diploma qualified. Book a trial lesson today.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@500;700&family=Inter:wght@500;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@500;700&family=Inter:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
-<!-- Theme switcher: lets you preview all 3 style directions. Remove once a style is chosen. -->
-<div class="theme-switcher" role="group" aria-label="Preview style">
-  <button type="button" data-theme-btn="classical" aria-pressed="true">Elegant Classical</button>
-  <button type="button" data-theme-btn="warm" aria-pressed="false">Warm &amp; Approachable</button>
-  <button type="button" data-theme-btn="minimalist" aria-pressed="false">Modern Minimalist</button>
-</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+    <symbol id="i-piano" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v10M12 4v10M16 4v10"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+  </defs>
+</svg>
 
-<header class="hero">
-  <div class="container">
-    <img class="portrait placeholder" src="assets/images/portrait.jpg" alt="[Wife's name], piano teacher" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22140%22 height=%22140%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23ddd%22/></svg>'">
-    <p class="eyebrow">Private Piano Lessons</p>
-    <h1>[Wife's Name] Piano Studio</h1>
-    <p class="tagline placeholder">20 years of teaching experience — ABRSM Grade 8 and ATCL diploma qualified. Patient, structured lessons for beginners through exam-level students.</p>
-    <div class="cta-row">
-      <a class="cta" href="#contact">Book a Trial Lesson</a>
-      <a class="cta secondary" href="#lessons">See Lessons Offered</a>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top"><span class="brand-mark">♪</span> [Studio Name]</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#studio">Studio</a>
+      <a href="#lessons">Lessons</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="btn btn-primary btn-sm" href="#contact">Book a Trial</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Private Piano Lessons</p>
+      <h1>Learn piano with a teacher who has <span class="grad-text">shaped musicians for 20 years</span></h1>
+      <p class="lead placeholder">ABRSM Grade 8 and ATCL diploma qualified. Patient, structured lessons for complete beginners through to exam candidates — taught on professional Yamaha instruments.</p>
+      <div class="btn-row" style="margin-top:28px">
+        <a class="btn btn-primary" href="#contact">Book a Trial Lesson</a>
+        <a class="btn btn-ghost" href="#lessons">See Lessons</a>
+      </div>
+      <ul class="hero-badges">
+        <li>ABRSM Grade 8</li>
+        <li>ATCL Diploma</li>
+        <li>20 years teaching</li>
+        <li>Yamaha Music School background</li>
+      </ul>
+    </div>
+    <div class="hero-media">
+      <img class="hero-photo" src="assets/images/clavinova.jpg" alt="White Yamaha Clavinova CLP digital piano, close up" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+      <div class="hero-photo-fallback">
+        <div class="keys"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div>Add photo:<br><code>assets/images/clavinova.jpg</code><br>(white Yamaha Clavinova CLP close-up)</div>
+      </div>
+      <div class="float-card">
+        <div class="icon"><svg width="22" height="22"><use href="#i-award"/></svg></div>
+        <div><strong>20+ years</strong>teaching piano</div>
+      </div>
     </div>
   </div>
 </header>
 
-<section id="about">
+<div class="stats">
   <div class="container">
-    <p class="eyebrow">About</p>
-    <h2>A trusted piano teacher with two decades of experience</h2>
-    <p class="placeholder">[Short bio paragraph: how she got started teaching, her teaching philosophy, what parents/students can expect from lessons — 3–4 sentences.]</p>
+    <div class="stats-grid">
+      <div><div class="stat-num">20+</div><div class="stat-label">Years teaching</div></div>
+      <div><div class="stat-num">Grade 8</div><div class="stat-label">ABRSM Piano</div></div>
+      <div><div class="stat-num">ATCL</div><div class="stat-label">Trinity College Diploma</div></div>
+      <div class="placeholder"><div class="stat-num">100+</div><div class="stat-label">Students taught</div></div>
+    </div>
+  </div>
+</div>
 
-    <ul class="credentials-list">
-      <li><span class="mark">✓</span> 20 years of private piano teaching experience, including years teaching with Yamaha Music School</li>
-      <li><span class="mark">✓</span> ABRSM Grade 8 (Piano) — Associated Board of the Royal Schools of Music</li>
-      <li><span class="mark">✓</span> ATCL Diploma (Associate, Trinity College London)</li>
-      <li class="placeholder">[Any other certifications, competitions judged, or notable student results]</li>
-    </ul>
+<section id="about">
+  <div class="container split">
+    <div>
+      <img class="split-photo" src="assets/images/portrait.jpg" alt="[Wife's name], piano teacher" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+      <div class="split-photo-fallback">Add photo:<br><code>assets/images/portrait.jpg</code><br>(portrait of the teacher)</div>
+    </div>
+    <div>
+      <p class="eyebrow">About</p>
+      <h2>A trusted piano teacher with <span class="grad-text">two decades</span> of experience</h2>
+      <p class="lead placeholder">[Short bio paragraph: how she got started teaching, her teaching philosophy, what parents and students can expect from lessons — 3–4 sentences.]</p>
+      <ul class="check-list">
+        <li><span class="tick"><svg><use href="#i-check"/></svg></span><span>20 years of piano teaching experience, including years teaching with Yamaha Music School</span></li>
+        <li><span class="tick"><svg><use href="#i-check"/></svg></span><span>ABRSM Grade 8 (Piano) — Associated Board of the Royal Schools of Music</span></li>
+        <li><span class="tick"><svg><use href="#i-check"/></svg></span><span>ATCL Diploma — Associate of Trinity College London</span></li>
+        <li class="placeholder"><span class="tick"><svg><use href="#i-check"/></svg></span><span>[Any other certifications, competitions judged, or notable student results]</span></li>
+      </ul>
+      <div class="trust">
+        <span><svg><use href="#i-award"/></svg>ABRSM</span>
+        <span><svg><use href="#i-award"/></svg>Trinity College London</span>
+        <span><svg><use href="#i-music"/></svg>Yamaha Music School</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="studio" class="section-alt">
+  <div class="container split">
+    <div>
+      <p class="eyebrow">The Studio</p>
+      <h2>Lessons on <span class="grad-text">professional Yamaha instruments</span></h2>
+      <p class="lead">Students learn on the same quality of instrument they'd meet at an exam or a recital — so what they practise is what they perform.</p>
+      <ul class="check-list">
+        <li><span class="tick"><svg><use href="#i-check"/></svg></span><span><strong>Yamaha Clavinova CLP</strong> — weighted-key digital piano with a full grand-piano touch and sound</span></li>
+        <li><span class="tick"><svg><use href="#i-check"/></svg></span><span><strong>Yamaha Electone ELS-02</strong> — for students interested in electone, keyboard and ensemble-style playing</span></li>
+        <li class="placeholder"><span class="tick"><svg><use href="#i-check"/></svg></span><span>[Location note, e.g. "Studio located in [Township] — details shared on enquiry"]</span></li>
+      </ul>
+    </div>
+    <div>
+      <img class="split-photo" src="assets/images/electone.jpg" alt="Yamaha Electone ELS-02" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+      <div class="split-photo-fallback">Add photo:<br><code>assets/images/electone.jpg</code><br>(Yamaha Electone ELS-02)</div>
+    </div>
   </div>
 </section>
 
 <section id="lessons">
   <div class="container">
-    <p class="eyebrow">Lessons</p>
-    <h2>What's offered</h2>
+    <div class="section-head">
+      <p class="eyebrow">Lessons</p>
+      <h2>Lessons for every stage</h2>
+      <p>From a child's very first notes to diploma-level repertoire, each lesson is planned around the student in front of her.</p>
+    </div>
     <div class="grid-3">
       <div class="card placeholder">
+        <div class="icon"><svg><use href="#i-piano"/></svg></div>
         <h3>Instruments &amp; Subjects</h3>
         <p>[Piano / keyboard / electone — confirm which instruments are taught. Music theory available on request?]</p>
       </div>
       <div class="card placeholder">
+        <div class="icon"><svg><use href="#i-users"/></svg></div>
         <h3>Levels &amp; Ages</h3>
         <p>[Beginner to advanced. ABRSM exam preparation. Suitable ages: e.g. 5 years old and up, plus adult learners?]</p>
       </div>
       <div class="card placeholder">
+        <div class="icon"><svg><use href="#i-home"/></svg></div>
         <h3>Format &amp; Area</h3>
         <p>[Lessons at studio / home visits / online. General service area, e.g. "Serving [Township], [City]".]</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg><use href="#i-award"/></svg></div>
+        <h3>Exam Preparation</h3>
+        <p>Structured ABRSM preparation — scales, sight-reading, aural and repertoire — built into weekly lessons when a student is working towards a grade.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg><use href="#i-book"/></svg></div>
+        <h3>Patient, Structured Teaching</h3>
+        <p>Two decades of teaching students of all ages means a clear path for every learner, without pressure.</p>
+      </div>
+      <div class="card placeholder">
+        <div class="icon"><svg><use href="#i-music"/></svg></div>
+        <h3>Pricing</h3>
+        <p>[State rates here, or "Contact for current rates and available time slots."]</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="why">
+<section id="how" class="section-alt">
   <div class="container">
-    <p class="eyebrow">Why Learn Here</p>
-    <h2>Why families choose these lessons</h2>
-    <div class="grid-3">
-      <div class="card">
-        <h3>Experienced &amp; Patient</h3>
-        <p>Two decades of teaching students of all ages, from first-time beginners to exam candidates.</p>
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2>Getting started is simple</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Say hello</h3>
+        <p>Send a WhatsApp message or email with the student's age and experience — beginners are very welcome.</p>
       </div>
-      <div class="card">
-        <h3>Exam-Ready Training</h3>
-        <p>ABRSM and diploma-level training background means structured, exam-focused progress when needed.</p>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Trial lesson</h3>
+        <p>A relaxed first lesson to get to know each other, assess the current level and agree on goals.</p>
       </div>
-      <div class="card placeholder">
-        <h3>[Pricing]</h3>
-        <p>[State rates here, or "Contact for current rates and available time slots."]</p>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Weekly lessons</h3>
+        <p>A regular weekly slot with a clear plan, practice guidance, and exam preparation when the time is right.</p>
       </div>
     </div>
   </div>
@@ -90,30 +196,46 @@
 
 <section id="testimonials">
   <div class="container">
-    <p class="eyebrow">Testimonials</p>
-    <h2>What parents &amp; students say</h2>
-    <blockquote class="testimonial placeholder">
-      "[Testimonial quote from a parent or student.]"
-      <cite>— [Name, e.g. "Parent of a Grade 3 student"]</cite>
-    </blockquote>
-    <blockquote class="testimonial placeholder">
-      "[Second testimonial, optional — remove this block if not available yet.]"
-      <cite>— [Name]</cite>
-    </blockquote>
+    <div class="section-head">
+      <p class="eyebrow">Reviews</p>
+      <h2>What parents &amp; students say</h2>
+    </div>
+    <div class="grid-3">
+      <blockquote class="testimonial placeholder">
+        <div class="stars">★★★★★</div>
+        <p>"[Testimonial quote from a parent or student.]"</p>
+        <footer><span class="avatar">A</span><cite><strong>[Name]</strong>Parent of a Grade 3 student</cite></footer>
+      </blockquote>
+      <blockquote class="testimonial placeholder">
+        <div class="stars">★★★★★</div>
+        <p>"[Second testimonial — remove this block if not available yet.]"</p>
+        <footer><span class="avatar">B</span><cite><strong>[Name]</strong>Adult learner</cite></footer>
+      </blockquote>
+      <blockquote class="testimonial placeholder">
+        <div class="stars">★★★★★</div>
+        <p>"[Third testimonial — remove this block if not available yet.]"</p>
+        <footer><span class="avatar">C</span><cite><strong>[Name]</strong>Parent</cite></footer>
+      </blockquote>
+    </div>
   </div>
 </section>
 
 <section id="contact">
   <div class="container">
-    <p class="eyebrow">Get In Touch</p>
-    <h2>Book a trial lesson</h2>
-    <div class="contact-grid">
-      <ul class="contact-list">
-        <li>📞 <a class="placeholder" href="tel:+60000000000">+60 00-000 0000</a></li>
-        <li>💬 <a class="placeholder" href="https://wa.me/60000000000" target="_blank" rel="noopener">Chat on WhatsApp</a></li>
-        <li>✉️ <a class="placeholder" href="mailto:hello@example.com">hello@example.com</a></li>
-      </ul>
-      <div class="qr-box">
+    <div class="cta-band">
+      <div>
+        <h2>Ready to start your musical journey?</h2>
+        <p class="lead">Message today to arrange a trial lesson. Beginners, returning players and exam candidates all welcome.</p>
+        <div class="btn-row" style="margin-top:24px">
+          <a class="btn btn-primary" href="https://wa.me/60000000000" target="_blank" rel="noopener"><svg><use href="#i-chat"/></svg>Chat on WhatsApp</a>
+          <a class="btn btn-ghost" href="mailto:hello@example.com"><svg><use href="#i-mail"/></svg>Email</a>
+        </div>
+        <ul class="contact-list">
+          <li><a class="placeholder" href="tel:+60000000000"><svg><use href="#i-phone"/></svg>+60 00-000 0000</a></li>
+          <li><a class="placeholder" href="mailto:hello@example.com"><svg><use href="#i-mail"/></svg>hello@example.com</a></li>
+        </ul>
+      </div>
+      <div class="qr-card">
         <img src="assets/qr/whatsapp-qr.png" alt="Scan to WhatsApp" onerror="this.style.opacity=0.3">
         <p>Scan to chat on WhatsApp</p>
       </div>
@@ -121,32 +243,70 @@
   </div>
 </section>
 
-<footer>
+<footer class="footer">
   <div class="container">
-    <p>© <span id="year"></span> [Wife's Name] Piano Studio. All rights reserved.</p>
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark">♪</span> [Studio Name]</a>
+        <p style="margin:14px 0 0; max-width:340px">Piano lessons with 20 years of teaching experience. ABRSM Grade 8 and ATCL diploma qualified.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#studio">The Studio</a></li>
+          <li><a href="#lessons">Lessons</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a class="placeholder" href="tel:+60000000000">+60 00-000 0000</a></li>
+          <li><a class="placeholder" href="mailto:hello@example.com">hello@example.com</a></li>
+          <li><a href="https://wa.me/60000000000" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © <span id="year"></span> [Studio Name]. All rights reserved.
+      <span class="credits">Photos: piano keys by <a href="https://unsplash.com/photos/jqvpD7xwLns" target="_blank" rel="noopener">Parvez AzarQaderi</a> (Unsplash) · Electone ELS-02C by <a href="https://commons.wikimedia.org/wiki/File:ELS-02C_Stagea_(2014).jpg" target="_blank" rel="noopener">Mintos 23</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> (cropped)</span>
+    </div>
   </div>
 </footer>
+
+<!-- Preview control: switches between the 3 style directions. Remove once a style is chosen. -->
+<div class="theme-switcher" role="group" aria-label="Preview style">
+  <span class="label">Style</span>
+  <button type="button" data-theme-btn="classical" aria-pressed="true">Classical</button>
+  <button type="button" data-theme-btn="warm" aria-pressed="false">Warm</button>
+  <button type="button" data-theme-btn="minimalist" aria-pressed="false">Minimal</button>
+</div>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
   var buttons = document.querySelectorAll('[data-theme-btn]');
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-theme-btn') === theme ? 'true' : 'false'); });
+  }
   buttons.forEach(function (btn) {
     btn.addEventListener('click', function () {
       var theme = btn.getAttribute('data-theme-btn');
-      document.documentElement.setAttribute('data-theme', theme);
-      buttons.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      applyTheme(theme);
       try { localStorage.setItem('preferredTheme', theme); } catch (e) {}
     });
   });
-
-  try {
-    var saved = localStorage.getItem('preferredTheme');
-    if (saved) {
-      document.documentElement.setAttribute('data-theme', saved);
-      buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-theme-btn') === saved ? 'true' : 'false'); });
-    }
-  } catch (e) {}
+  var fromUrl = new URLSearchParams(location.search).get('theme');
+  if (fromUrl) {
+    applyTheme(fromUrl);
+  } else {
+    try {
+      var saved = localStorage.getItem('preferredTheme');
+      if (saved) applyTheme(saved);
+    } catch (e) {}
+  }
 </script>
 
 </body>

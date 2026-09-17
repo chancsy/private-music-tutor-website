@@ -23,9 +23,10 @@ scripts/
 
 ## Picking a style
 
-`index.html` has a theme switcher at the top (Elegant Classical / Warm & Approachable /
-Modern Minimalist) so you can preview all three live in a browser before committing to one.
-Once you've picked a favourite:
+`index.html` has a floating style switcher (bottom-right: Classical / Warm / Minimal) so you
+can preview all three live in a browser before committing to one. You can also open a specific
+style directly with a URL parameter, e.g. `index.html?theme=warm` — handy for sending someone a
+link to one particular version. Once you've picked a favourite:
 
 - For the **website**, you can just leave the switcher in (it's harmless — hidden on print)
   or change `<html data-theme="...">` in `index.html` to your chosen theme and delete the
@@ -45,8 +46,23 @@ bracketed text) in both the website and the posters. Search for `placeholder` an
 - Instruments/subjects, levels, ages, service area, lesson format
 - Pricing (or "contact for rates")
 - Testimonials (optional — delete the block(s) if none are available)
-- Photos — drop real files into `assets/images/` (e.g. `portrait.jpg`) matching the
-  filenames referenced in the HTML, or update the `src` attributes to match your filenames
+- Photos — drop real files into `assets/images/` using these filenames (the HTML already
+  references them, and shows a labelled placeholder box if a file is missing):
+  - `portrait.jpg` — portrait of the teacher (about section, 4:3)
+  - `clavinova.jpg` — white Yamaha Clavinova CLP close-up (hero, cropped to 4:5)
+  - `electone.jpg` — Yamaha Electone ELS-02 (studio section, 4:3)
+
+  `clavinova.jpg` and `electone.jpg` currently contain free stock stand-ins (see Photo credits
+  below). Replacing them with photos of the actual instruments is strongly recommended — and once
+  you do, delete the corresponding credit line from the footer in `index.html`.
+
+## Photo credits (current stand-in images)
+
+- `clavinova.jpg` — "White piano keys" by Parvez AzarQaderi, Unsplash
+  (https://unsplash.com/photos/jqvpD7xwLns), Unsplash License (free to use, credit appreciated).
+- `electone.jpg` — "ELS-02C Stagea (2014)" by Mintos 23, Wikimedia Commons
+  (https://commons.wikimedia.org/wiki/File:ELS-02C_Stagea_(2014).jpg), CC BY-SA 4.0, cropped.
+  Attribution is **required** for as long as this image is used — it's in the site footer.
 
 ## Updating the WhatsApp QR code
 
