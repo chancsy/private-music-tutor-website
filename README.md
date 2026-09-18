@@ -105,7 +105,7 @@ each; the difference is *how* the page transitions. Start at `concepts/index.htm
 
 - `concepts/scroll-morph.html` — **Morph.** Colours, blobs and typography interpolate continuously
   with scroll position (JS sets two mix percentages; CSS `color-mix()` blends). Light throughout.
-- `concepts/scroll-chapters.html` — **Chapters.** Three full-screen snap chapters; the backdrop
+- `concepts/scroll-chapters.html` — **Chapters.** Three full-screen chapters; the backdrop
   crossfades dark indigo → pastel → dark gold. The most dramatic.
 - `concepts/scroll-stage.html` — **Stage.** A pinned illustrated keyboard swaps props and colours
   as the audience panels scroll past; becomes a compact sticky strip on phones.
