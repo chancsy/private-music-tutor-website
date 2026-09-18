@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" data-zone="students">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept C · Stage — [Studio Name] Piano Studio</title>
+<meta name="description" content="Scroll concept C: a pinned illustrated stage changes its props and colours as the audience panels — teens & students, young kids, working adults — scroll past.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Fredoka:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
+<style>
+html[data-zone="students"] { --bg: #f3f1ff; --ink: #171433; --dim: #5b5878; --accent: #6d3df2; --accent-ink: #fff;    --pop: #c8ff3d; --border: #dcd6ff; --surface: #fff; --stage-body: #1c1740; --stage-glow: #8b6cff; --radius: 18px; --font-brand: "Space Grotesk", system-ui, sans-serif; }
+html[data-zone="kids"]     { --bg: #fff5ea; --ink: #4a3b33; --dim: #8a7a70; --accent: #d93d75; --accent-ink: #fff;    --pop: #7fd6c2; --border: #ffdcc4; --surface: #fff; --stage-body: #ff9fbd; --stage-glow: #7fd6c2; --radius: 32px; --font-brand: "Fredoka", system-ui, sans-serif; }
+html[data-zone="adults"]   { --bg: #f7f3e9; --ink: #0f1729; --dim: #4a4f63; --accent: #0f1729; --accent-ink: #f3ecd9; --pop: #c9a24b; --border: #e4dcc8; --surface: #fff; --stage-body: #0f1729; --stage-glow: #c9a24b; --radius: 10px; --font-brand: "Playfair Display", Georgia, serif; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Inter", system-ui, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; transition: background-color .8s ease, color .8s ease; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- nav ---------- */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 40; background: color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); transition: background-color .8s, border-color .8s; }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-brand); font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+.brand-mark { width: 32px; height: 32px; border-radius: 10px; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-family: "Inter", sans-serif; transition: background-color .6s, color .6s; }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a { padding: 7px 12px; border-radius: 999px; font-size: .84rem; font-weight: 600; color: var(--dim); text-decoration: none; transition: background-color .3s, color .3s; }
+html[data-zone="students"] .nav-links a[data-n="students"],
+html[data-zone="kids"]     .nav-links a[data-n="kids"],
+html[data-zone="adults"]   .nav-links a[data-n="adults"] { background: var(--accent); color: var(--accent-ink); }
+@media (max-width: 760px) { .nav-links { display: none; } }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 999px; font-weight: 700; font-size: .95rem; text-decoration: none; border: 1.5px solid transparent; transition: transform .15s, background-color .6s, color .6s, border-color .6s; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-ghost { border-color: var(--border); color: var(--ink); }
+.btn-sm { padding: 9px 16px; font-size: .86rem; }
+.btn svg { width: 18px; height: 18px; }
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ---------- pinned stage + scrolling panels ---------- */
+.scrolly { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; padding-top: 64px; }
+.stage { position: sticky; top: 64px; height: calc(100vh - 64px); height: calc(100svh - 64px); display: grid; place-items: center; }
+.stage-card { width: min(100%, 520px); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 28px 22px; box-shadow: 0 30px 70px color-mix(in srgb, var(--stage-glow) 28%, transparent); transition: border-radius .6s, box-shadow .8s, border-color .8s; }
+.scene { width: 100%; height: auto; display: block; }
+.stage-label { margin-top: 14px; display: flex; justify-content: space-between; align-items: center; font-size: .8rem; color: var(--dim); }
+.stage-label b { color: var(--ink); font-weight: 700; }
+.stage-label span[data-for] { display: none; }
+html[data-zone="students"] .stage-label span[data-for="students"],
+html[data-zone="kids"]     .stage-label span[data-for="kids"],
+html[data-zone="adults"]   .stage-label span[data-for="adults"] { display: inline; }
+.dots { display: flex; gap: 6px; }
+.dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background-color .4s, transform .4s; }
+html[data-zone="students"] .dots i:nth-child(1),
+html[data-zone="kids"]     .dots i:nth-child(2),
+html[data-zone="adults"]   .dots i:nth-child(3) { background: var(--accent); transform: scale(1.35); }
+
+/* scene colours + props */
+.glow { fill: var(--stage-glow); opacity: .28; transition: fill .8s; }
+.kbd-body { fill: var(--stage-body); transition: fill .8s; }
+.led { fill: var(--pop); transition: fill .8s; }
+.fill-accent { fill: var(--accent); transition: fill .8s; }
+.stroke-accent { stroke: var(--accent); transition: stroke .8s; }
+.fill-pop { fill: var(--pop); transition: fill .8s; }
+.stroke-pop { stroke: var(--pop); transition: stroke .8s; }
+.stroke-ink { stroke: var(--ink); transition: stroke .8s; }
+.stroke-dim { stroke: var(--dim); transition: stroke .8s; }
+.prop { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+html[data-zone="students"] .prop-students,
+html[data-zone="kids"]     .prop-kids,
+html[data-zone="adults"]   .prop-adults { opacity: 1; transform: translateY(0); }
+.eqbars rect { transform-origin: bottom; transform-box: fill-box; animation: eq .9s ease-in-out infinite alternate; }
+.eqbars rect:nth-child(2) { animation-delay: -.3s; } .eqbars rect:nth-child(3) { animation-delay: -.6s; } .eqbars rect:nth-child(4) { animation-delay: -.15s; }
+@keyframes eq { from { transform: scaleY(.3); } to { transform: scaleY(1); } }
+@media (prefers-reduced-motion: reduce) { .eqbars rect { animation: none; } html { scroll-behavior: auto; } .prop { transition: opacity .3s; transform: none; } }
+
+.panel { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 12vh 0; scroll-margin-top: 84px; font-family: var(--font-body, "Inter", system-ui, sans-serif); }
+.panel-students { --font-head: "Space Grotesk", system-ui, sans-serif; }
+.panel-kids     { --font-head: "Fredoka", system-ui, sans-serif; --font-body: "Nunito", system-ui, sans-serif; }
+.panel-adults   { --font-head: "Playfair Display", Georgia, serif; }
+.panel h2 { font-family: var(--font-head); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.08; margin: 0 0 .45em; letter-spacing: -.015em; }
+.panel h3 { font-family: var(--font-head); font-size: 1.1rem; margin: 0 0 .4em; }
+.eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: .75rem; font-weight: 700; color: var(--accent); margin: 0 0 14px; transition: color .6s; }
+.panel-kids .eyebrow { text-transform: none; letter-spacing: 0; font-size: 1rem; }
+.lead { font-size: 1.1rem; color: var(--dim); max-width: 520px; margin: 0 0 24px; }
+mark { background: none; color: inherit; }
+.panel-students mark { background: linear-gradient(transparent 58%, #c8ff3d 58%); padding: 0 .08em; }
+.panel-kids mark { color: #d93d75; text-decoration: underline wavy #7fd6c2; text-decoration-thickness: 3px; text-underline-offset: 7px; }
+.panel-adults mark { font-style: italic; color: #c9a24b; }
+
+.points { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 10px; }
+.points li { display: flex; gap: 12px; align-items: flex-start; padding: 13px 15px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-size: .95rem; transition: border-radius .6s, border-color .6s; }
+.points .ic { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); transition: background-color .6s, color .6s, border-radius .6s; }
+.panel-kids .points .ic { border-radius: 50%; }
+.points svg { width: 17px; height: 17px; }
+
+.note { margin: 26px 0 0; padding: 18px 22px; border-left: 3px solid var(--pop); background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; font-style: italic; transition: border-color .6s, border-radius .6s; }
+.note p { margin: 0; }
+.note footer { font-style: normal; font-size: .85rem; color: var(--dim); margin-top: 8px; }
+
+.contact { margin-top: 26px; background: #0b0f1a; color: #f3ecd9; border-radius: var(--radius); padding: 26px; border: 1px solid color-mix(in srgb, #c9a24b 45%, transparent); }
+.contact h3 { color: #e2c77d; }
+.btn-gold { background: #c9a24b; color: #0b0f1a; }
+.btn-ghost-light { border-color: rgba(243, 236, 217, .4); color: #f3ecd9; }
+.contact-list { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 8px; font-weight: 600; font-size: .95rem; }
+.contact-list a { text-decoration: none; display: inline-flex; gap: 10px; align-items: center; }
+.contact-list svg { width: 18px; height: 18px; opacity: .85; }
+.qr { display: flex; gap: 14px; align-items: center; margin-top: 18px; padding-top: 16px; border-top: 1px solid #283048; font-size: .8rem; color: #a9adbb; }
+.qr img { width: 76px; height: 76px; background: #fff; padding: 4px; border-radius: 8px; }
+
+.creds { margin-top: 26px; display: flex; gap: 22px; flex-wrap: wrap; font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+.creds span { display: inline-flex; align-items: center; gap: 8px; }
+.creds svg { width: 16px; height: 16px; color: #c9a24b; }
+
+.placeholder { outline: 1.5px dashed var(--pop); outline-offset: 3px; }
+
+.footer { padding: 28px 0 40px; border-top: 1px solid var(--border); font-size: .78rem; color: var(--dim); }
+.footer p { margin: 6px 0; }
+
+@media (max-width: 900px) {
+  .scrolly { grid-template-columns: 1fr; gap: 0; }
+  .stage { height: auto; z-index: 5; padding: 12px 0 10px; background: linear-gradient(var(--bg) 82%, transparent); place-items: stretch; transition: background .8s; }
+  .stage-card { width: 100%; padding: 12px 14px; display: grid; grid-template-columns: 124px 1fr; gap: 14px; align-items: center; }
+  .scene { width: 124px; }
+  .stage-label { margin-top: 0; flex-direction: column; align-items: flex-start; gap: 8px; }
+  .panel { min-height: auto; padding: 9vh 0; scroll-margin-top: 215px; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-coffee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  </defs>
+</svg>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top"><span class="brand-mark">♪</span> [Studio Name]</a>
+    <div class="nav-links">
+      <a href="#students" data-n="students">Teens &amp; students</a>
+      <a href="#kids" data-n="kids">Kids</a>
+      <a href="#adults" data-n="adults">Adults</a>
+    </div>
+    <a class="btn btn-primary btn-sm" href="https://wa.me/60000000000" target="_blank" rel="noopener"><svg><use href="#i-chat"/></svg>WhatsApp</a>
+  </div>
+</nav>
+
+<main class="container scrolly" id="top">
+
+  <aside class="stage" aria-hidden="true">
+    <div class="stage-card">
+      <svg class="scene" viewBox="0 0 440 340">
+        <circle class="glow" cx="220" cy="150" r="150"/>
+
+        <!-- teens & students: headphones + equaliser -->
+        <g class="prop prop-students">
+          <path d="M120 152 C120 60 320 60 320 152" fill="none" class="stroke-accent" stroke-width="12" stroke-linecap="round"/>
+          <rect x="100" y="134" width="34" height="52" rx="14" class="fill-accent"/>
+          <rect x="306" y="134" width="34" height="52" rx="14" class="fill-accent"/>
+          <g class="fill-pop eqbars">
+            <rect x="366" y="96" width="9" height="56" rx="4"/><rect x="381" y="76" width="9" height="76" rx="4"/><rect x="396" y="106" width="9" height="46" rx="4"/><rect x="411" y="86" width="9" height="66" rx="4"/>
+          </g>
+        </g>
+
+        <!-- young kids: stars, a smiling note, a balloon -->
+        <g class="prop prop-kids">
+          <g fill="#ffd166">
+            <path d="M0,-22 L6,-7 L22,-7 L9,3 L14,18 L0,9 L-14,18 L-9,3 L-22,-7 L-6,-7 Z" transform="translate(96 74)"/>
+            <path d="M0,-22 L6,-7 L22,-7 L9,3 L14,18 L0,9 L-14,18 L-9,3 L-22,-7 L-6,-7 Z" transform="translate(356 60) scale(.7)"/>
+            <path d="M0,-22 L6,-7 L22,-7 L9,3 L14,18 L0,9 L-14,18 L-9,3 L-22,-7 L-6,-7 Z" transform="translate(372 150) scale(.5)"/>
+          </g>
+          <g transform="translate(212 112)">
+            <rect x="34" y="-84" width="10" height="100" rx="5" fill="#4a3b33"/>
+            <path d="M44,-84 C80,-76 84,-40 62,-24 C76,-46 64,-64 44,-68 Z" fill="#4a3b33"/>
+            <ellipse cx="8" cy="18" rx="40" ry="31" fill="#ff7aa2" transform="rotate(-18 8 18)"/>
+            <circle cx="-6" cy="12" r="6" fill="#fff"/><circle cx="-4" cy="13" r="3" fill="#4a3b33"/>
+            <circle cx="18" cy="12" r="6" fill="#fff"/><circle cx="20" cy="13" r="3" fill="#4a3b33"/>
+            <path d="M-4,26 Q7,36 18,26" stroke="#4a3b33" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+          <circle cx="70" cy="140" r="22" class="fill-pop"/>
+          <path d="M70 162 q6 14 -4 30" fill="none" class="stroke-dim" stroke-width="2"/>
+        </g>
+
+        <!-- adults: coffee, sheet music, a quiet gold ring -->
+        <g class="prop prop-adults">
+          <circle cx="220" cy="150" r="128" fill="none" class="stroke-pop" stroke-width="1.5" stroke-dasharray="3 9"/>
+          <g transform="translate(318 106)">
+            <rect x="0" y="0" width="56" height="48" rx="10" fill="#fff" class="stroke-ink" stroke-width="3"/>
+            <path d="M56 12 h10 a12 12 0 0 1 0 24 h-10" fill="none" class="stroke-ink" stroke-width="3"/>
+            <path d="M16 -8 c-6 -8 6 -12 0 -20 M32 -8 c-6 -8 6 -12 0 -20" fill="none" class="stroke-pop" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <g transform="translate(72 76) rotate(-6)">
+            <rect x="0" y="0" width="72" height="92" rx="6" fill="#fff" class="stroke-ink" stroke-width="2"/>
+            <path d="M12 22h48M12 36h48M12 50h48M12 64h30" class="stroke-dim" stroke-width="2" stroke-linecap="round"/>
+            <path d="M52 60 v-24 l10 -3 v24" fill="none" class="stroke-pop" stroke-width="2.5" stroke-linejoin="round"/>
+          </g>
+        </g>
+
+        <!-- keyboard (always present) -->
+        <g class="kbd">
+          <rect x="40" y="188" width="360" height="118" rx="22" class="kbd-body"/>
+          <rect x="58" y="206" width="324" height="84" rx="10" fill="#fff"/>
+          <path d="M94 206v84M130 206v84M166 206v84M202 206v84M238 206v84M274 206v84M310 206v84M346 206v84" fill="none" stroke="#d3d3de" stroke-width="2"/>
+          <g fill="#1d1d2b">
+            <rect x="83" y="206" width="20" height="50" rx="4"/><rect x="119" y="206" width="20" height="50" rx="4"/>
+            <rect x="191" y="206" width="20" height="50" rx="4"/><rect x="227" y="206" width="20" height="50" rx="4"/><rect x="263" y="206" width="20" height="50" rx="4"/>
+            <rect x="335" y="206" width="20" height="50" rx="4"/>
+          </g>
+          <circle cx="382" cy="197" r="4" class="led"/>
+        </g>
+      </svg>
+      <div class="stage-label">
+        <div>Now for: <b><span data-for="students">teens &amp; students</span><span data-for="kids">little beginners</span><span data-for="adults">adults &amp; returners</span></b></div>
+        <div class="dots"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="panels">
+
+    <section class="panel panel-students" id="students" data-zone="students">
+      <p class="eyebrow">Teens &amp; students · 13–24</p>
+      <h2>Play the songs you <mark>actually listen to</mark>.</h2>
+      <p class="lead">No gimmicks: real technique, repertoire you care about, and a teacher who has been doing this for twenty years. ABRSM or Trinity exams whenever you want the certificate to go with it.</p>
+      <div class="btn-row"><a class="btn btn-primary" href="https://wa.me/60000000000" target="_blank" rel="noopener">Book a trial on WhatsApp</a></div>
+      <ul class="points">
+        <li><span class="ic"><svg><use href="#i-music"/></svg></span><span><strong>Your playlist, on the keys.</strong> Pop, film and game soundtracks — learned properly.</span></li>
+        <li><span class="ic"><svg><use href="#i-award"/></svg></span><span><strong>Exam-ready when you are.</strong> ABRSM and Trinity grades, taught by a Grade 8 + ATCL teacher.</span></li>
+        <li><span class="ic"><svg><use href="#i-zap"/></svg></span><span><strong>Electone, full-band sound.</strong> Stage-style playing on a Yamaha ELS-02.</span></li>
+        <li><span class="ic"><svg><use href="#i-clock"/></svg></span><span><strong>Slots around school &amp; uni.</strong> <span class="placeholder">[Confirm after-school / weekend times]</span></span></li>
+      </ul>
+    </section>
+
+    <section class="panel panel-kids" id="kids" data-zone="kids">
+      <p class="eyebrow">Little beginners · ages 4–12</p>
+      <h2>First notes, <mark>made fun</mark>.</h2>
+      <p class="lead">Short, playful lessons that still build real skills — rhythm games, singing, and a small win every week. Parents are welcome to sit in, and you'll hear honestly how it's going.</p>
+      <div class="btn-row"><a class="btn btn-primary" href="https://wa.me/60000000000" target="_blank" rel="noopener">Ask about a trial lesson</a></div>
+      <ul class="points">
+        <li><span class="ic"><svg><use href="#i-star"/></svg></span><span><strong>Play first, theory gently.</strong> Games and songs before worksheets.</span></li>
+        <li><span class="ic"><svg><use href="#i-heart"/></svg></span><span><strong>20 years with young learners,</strong> including years at Yamaha Music School.</span></li>
+        <li><span class="ic"><svg><use href="#i-award"/></svg></span><span><strong>Graded exams only when they're ready</strong> — never pushed.</span></li>
+        <li><span class="ic"><svg><use href="#i-users"/></svg></span><span><strong>A relaxed trial lesson</strong> to see if it clicks. No pressure either way.</span></li>
+      </ul>
+    </section>
+
+    <section class="panel panel-adults" id="adults" data-zone="adults">
+      <p class="eyebrow">Adults &amp; returning players</p>
+      <h2>It's never too late to begin — <mark>or to come back</mark>.</h2>
+      <p class="lead">Structured, unhurried lessons for adult beginners and returners, taught on a Yamaha Clavinova. Progress you can hear, on a schedule that respects your week.</p>
+      <ul class="points">
+        <li><span class="ic"><svg><use href="#i-coffee"/></svg></span><span><strong>Adult beginners welcome.</strong> Clear steps, no jargon, no rush.</span></li>
+        <li><span class="ic"><svg><use href="#i-music"/></svg></span><span><strong>Returning after years away?</strong> We rebuild technique gently around music you'll enjoy.</span></li>
+        <li><span class="ic"><svg><use href="#i-award"/></svg></span><span><strong>ABRSM Grade 8 · ATCL Diploma.</strong> 20 years of teaching experience.</span></li>
+        <li><span class="ic"><svg><use href="#i-clock"/></svg></span><span><strong>Evening &amp; weekend slots.</strong> <span class="placeholder">[Confirm availability]</span></span></li>
+      </ul>
+      <blockquote class="note">
+        <p class="placeholder">"[A short note in the teacher's own words — why she still teaches after twenty years, and what a student can honestly expect from her. Two or three sentences.]"</p>
+        <footer>— [Wife's Name] · ABRSM Grade 8 · ATCL Diploma</footer>
+      </blockquote>
+      <div class="contact" id="contact">
+        <h3>Start the conversation</h3>
+        <div class="btn-row">
+          <a class="btn btn-gold" href="https://wa.me/60000000000" target="_blank" rel="noopener"><svg><use href="#i-chat"/></svg>Chat on WhatsApp</a>
+          <a class="btn btn-ghost-light" href="mailto:hello@example.com"><svg><use href="#i-mail"/></svg>Email</a>
+        </div>
+        <ul class="contact-list">
+          <li><a class="placeholder" href="tel:+60000000000"><svg><use href="#i-phone"/></svg>+60 00-000 0000</a></li>
+          <li><a class="placeholder" href="mailto:hello@example.com"><svg><use href="#i-mail"/></svg>hello@example.com</a></li>
+        </ul>
+        <div class="qr"><img src="../assets/qr/whatsapp-qr.png" alt="Scan to WhatsApp" onerror="this.style.opacity=0.3"><span>Scan to open a WhatsApp chat</span></div>
+      </div>
+      <div class="creds">
+        <span><svg><use href="#i-award"/></svg>ABRSM</span>
+        <span><svg><use href="#i-award"/></svg>Trinity College London</span>
+        <span><svg><use href="#i-music"/></svg>Yamaha Music School</span>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>© <span id="year"></span> [Studio Name]. Concept C of 3 — <a href="index.html">back to the concept index</a>.</p>
+    <p>Photos: piano keys by <a href="https://unsplash.com/photos/jqvpD7xwLns" target="_blank" rel="noopener">Parvez AzarQaderi</a> (Unsplash) · Electone ELS-02C by <a href="https://commons.wikimedia.org/wiki/File:ELS-02C_Stagea_(2014).jpg" target="_blank" rel="noopener">Mintos 23</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> (cropped).</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var root = document.documentElement;
+  var panels = document.querySelectorAll('.panel');
+
+  // Whichever panel crosses the middle band of the viewport sets the active audience.
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) root.dataset.zone = e.target.dataset.zone; });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    panels.forEach(function (p) { io.observe(p); });
+  }
+</script>
+
+</body>
+</html>

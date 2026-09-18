@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scroll concepts — [Studio Name] Piano Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #f7f3e9; color: #0f1729; font-family: "Inter", system-ui, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.container { max-width: 960px; margin: 0 auto; padding: 64px 24px 80px; }
+h1 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(2rem, 4vw, 2.8rem); margin: 0 0 .3em; line-height: 1.1; }
+.lead { color: #4a4f63; max-width: 640px; margin: 0 0 40px; font-size: 1.05rem; }
+.grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+a.card { display: block; text-decoration: none; color: inherit; background: #fff; border: 1px solid #e4dcc8; border-radius: 14px; padding: 24px; transition: transform .18s, box-shadow .18s; }
+a.card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(15, 23, 41, .1); }
+.tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #c9a24b; margin-bottom: 10px; }
+.card h2 { font-family: "Playfair Display", Georgia, serif; font-size: 1.35rem; margin: 0 0 .4em; }
+.card p { margin: 0 0 12px; color: #4a4f63; font-size: .95rem; }
+.card .how { font-size: .82rem; color: #0f1729; background: #f7f3e9; border-radius: 8px; padding: 10px 12px; }
+.strip { display: flex; height: 8px; border-radius: 999px; overflow: hidden; margin: 0 0 18px; }
+.strip span { flex: 1; }
+.notes { margin-top: 44px; padding-top: 24px; border-top: 1px solid #e4dcc8; color: #4a4f63; font-size: .9rem; }
+.notes ul { padding-left: 18px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <p class="tag">Feature branch · scroll-theme-transition</p>
+  <h1>One page, three audiences.</h1>
+  <p class="lead">Three explorations of a single page whose look shifts as you scroll — teens &amp; students at the top, young children in the middle, working adults at the bottom. Same content in each; the difference is <em>how</em> the page transitions. Open one and scroll slowly.</p>
+
+  <div class="grid">
+    <a class="card" href="scroll-morph.html">
+      <div class="strip"><span style="background:#6d3df2"></span><span style="background:#c8ff3d"></span><span style="background:#ff7aa2"></span><span style="background:#7fd6c2"></span><span style="background:#0f1729"></span><span style="background:#c9a24b"></span></div>
+      <span class="tag">Concept A</span>
+      <h2>Morph</h2>
+      <p>Colours, blobs and typography interpolate continuously with your scroll position — there is no "cut", the page simply becomes the next look. Light throughout, so text stays readable at every point.</p>
+      <div class="how">JS sets two mix percentages from scroll; CSS <code>color-mix()</code> does the blending. Falls back to static section colours in older browsers.</div>
+    </a>
+    <a class="card" href="scroll-chapters.html">
+      <div class="strip"><span style="background:#12102a"></span><span style="background:#c8ff3d"></span><span style="background:#fff3f7"></span><span style="background:#d93d75"></span><span style="background:#0b0f1a"></span><span style="background:#c9a24b"></span></div>
+      <span class="tag">Concept B</span>
+      <h2>Chapters</h2>
+      <p>Three full-screen chapters that snap into place. The backdrop crossfades dark indigo → pastel → dark gold, and the top bar recolours to match. The most dramatic of the three.</p>
+      <div class="how">Scroll-snap sections; three fixed backdrop layers whose opacity follows each chapter's position.</div>
+    </a>
+    <a class="card" href="scroll-stage.html">
+      <div class="strip"><span style="background:#f3f1ff"></span><span style="background:#6d3df2"></span><span style="background:#fff5ea"></span><span style="background:#ff9fbd"></span><span style="background:#f7f3e9"></span><span style="background:#0f1729"></span></div>
+      <span class="tag">Concept C</span>
+      <h2>Stage</h2>
+      <p>An illustrated keyboard stays pinned on the left while the audience panels scroll past; its props and colours change for each audience (headphones → stars and a smiling note → coffee and sheet music). On phones the stage becomes a compact sticky strip.</p>
+      <div class="how">Sticky column + IntersectionObserver; every colour change is a plain CSS transition.</div>
+    </a>
+  </div>
+
+  <div class="notes">
+    <strong>Shared across all three</strong>
+    <ul>
+      <li>Same three audiences and the same honest copy: credentials up front, a first-person note from the teacher, no hype.</li>
+      <li>All kids-zone artwork is original SVG — no licensed characters.</li>
+      <li>Placeholders are dashed-outlined, as on the main site. Photos are the same stand-ins (credits in each page's footer).</li>
+      <li>These are self-contained explorations; none of them touches the main site's CSS. <a href="../index.html">Back to the main site</a>.</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

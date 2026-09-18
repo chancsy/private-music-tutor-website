@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" data-zone="students">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept A · Morph — [Studio Name] Piano Studio</title>
+<meta name="description" content="Scroll concept A: colours, blobs and type morph continuously from a students look, to a kids look, to a professional adults look.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Fredoka:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --a-bg: #f3f1ff; --a-ink: #171433; --a-dim: #5b5878; --a-border: #dcd6ff; --a-accent: #6d3df2; --a-pop: #c8ff3d;
+  --b-bg: #fff5ea; --b-ink: #4a3b33; --b-dim: #8a7a70; --b-border: #ffdcc4; --b-accent: #d93d75; --b-pop: #7fd6c2;
+  --c-bg: #f7f3e9; --c-ink: #0f1729; --c-dim: #4a4f63; --c-border: #e4dcc8; --c-accent: #0f1729; --c-pop: #c9a24b;
+
+  /* Set by JS from scroll position: students→kids, then kids→adults */
+  --p1: 0%;
+  --p2: 0%;
+
+  --bg:     color-mix(in oklab, color-mix(in oklab, var(--a-bg),     var(--b-bg)     var(--p1)), var(--c-bg)     var(--p2));
+  --ink:    color-mix(in oklab, color-mix(in oklab, var(--a-ink),    var(--b-ink)    var(--p1)), var(--c-ink)    var(--p2));
+  --dim:    color-mix(in oklab, color-mix(in oklab, var(--a-dim),    var(--b-dim)    var(--p1)), var(--c-dim)    var(--p2));
+  --border: color-mix(in oklab, color-mix(in oklab, var(--a-border), var(--b-border) var(--p1)), var(--c-border) var(--p2));
+  --accent: color-mix(in oklab, color-mix(in oklab, var(--a-accent), var(--b-accent) var(--p1)), var(--c-accent) var(--p2));
+  --pop:    color-mix(in oklab, color-mix(in oklab, var(--a-pop),    var(--b-pop)    var(--p1)), var(--c-pop)    var(--p2));
+}
+@supports not (color: color-mix(in oklab, red, blue)) {
+  :root { --bg: #f7f3e9; --ink: #0f1729; --dim: #4a4f63; --border: #e4dcc8; --accent: #0f1729; --pop: #c9a24b; }
+  .zone-students { background: var(--a-bg); }
+  .zone-kids { background: var(--b-bg); }
+  .zone-adults { background: var(--c-bg); }
+}
+
+html[data-zone="students"] { --font-brand: "Space Grotesk", system-ui, sans-serif; }
+html[data-zone="kids"]     { --font-brand: "Fredoka", system-ui, sans-serif; }
+html[data-zone="adults"]   { --font-brand: "Playfair Display", Georgia, serif; }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+.backdrop {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(60vw 60vw at 88% 8%, color-mix(in srgb, var(--pop) 42%, transparent), transparent 62%),
+    radial-gradient(48vw 48vw at 4% 78%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 62%);
+}
+
+/* ---------- nav + audience rail ---------- */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-brand); font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+.brand-mark { width: 32px; height: 32px; border-radius: 10px; background: var(--accent); color: #fff; display: grid; place-items: center; font-family: "Inter", sans-serif; }
+
+.rail { position: fixed; right: 22px; top: 50%; transform: translateY(-50%); z-index: 40; display: grid; gap: 14px; }
+.rail a { display: flex; align-items: center; gap: 10px; text-decoration: none; font-size: .78rem; font-weight: 600; color: var(--dim); }
+.rail i { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--dim); transition: transform .3s, background .3s, border-color .3s; }
+html[data-zone="students"] .rail a[data-r="students"],
+html[data-zone="kids"]     .rail a[data-r="kids"],
+html[data-zone="adults"]   .rail a[data-r="adults"] { color: var(--ink); }
+html[data-zone="students"] .rail a[data-r="students"] i,
+html[data-zone="kids"]     .rail a[data-r="kids"] i,
+html[data-zone="adults"]   .rail a[data-r="adults"] i { background: var(--accent); border-color: var(--accent); transform: scale(1.35); }
+@media (max-width: 900px) {
+  .rail { top: auto; bottom: 14px; right: 50%; transform: translateX(50%); grid-auto-flow: column; gap: 4px; padding: 5px; background: color-mix(in srgb, var(--bg) 86%, transparent); border: 1px solid var(--border); border-radius: 999px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .rail a { padding: 7px 12px; border-radius: 999px; white-space: nowrap; }
+  .rail i { display: none; }
+  html[data-zone="students"] .rail a[data-r="students"],
+  html[data-zone="kids"]     .rail a[data-r="kids"],
+  html[data-zone="adults"]   .rail a[data-r="adults"] { background: var(--accent); color: #fff; }
+}
+
+/* ---------- buttons ---------- */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 999px; font-weight: 700; font-size: .95rem; text-decoration: none; border: 1.5px solid transparent; transition: transform .15s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--z-accent, var(--accent)); color: #fff; }
+.btn-ghost { border-color: var(--border); color: var(--ink); }
+.btn-sm { padding: 9px 16px; font-size: .86rem; }
+.btn svg { width: 18px; height: 18px; }
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ---------- zones ---------- */
+.zone { position: relative; padding: 18vh 0; font-family: var(--font-body); }
+.zone:first-of-type { padding-top: calc(64px + 12vh); }
+.zone-students { --font-head: "Space Grotesk", system-ui, sans-serif; --font-body: "Inter", system-ui, sans-serif; --radius: 16px; --z-accent: var(--a-accent); --z-pop: var(--a-pop); --z-border: var(--a-border); --z-ink: var(--a-ink); }
+.zone-kids     { --font-head: "Fredoka", system-ui, sans-serif;       --font-body: "Nunito", system-ui, sans-serif; --radius: 30px; --z-accent: var(--b-accent); --z-pop: var(--b-pop); --z-border: var(--b-border); --z-ink: var(--b-ink); }
+.zone-adults   { --font-head: "Playfair Display", Georgia, serif;     --font-body: "Inter", system-ui, sans-serif;  --radius: 8px;  --z-accent: var(--c-accent); --z-pop: var(--c-pop); --z-border: var(--c-border); --z-ink: var(--c-ink); }
+
+.zone h1, .zone h2, .zone h3 { font-family: var(--font-head); line-height: 1.1; margin: 0 0 .45em; letter-spacing: -.01em; }
+.zone h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; }
+.zone h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; }
+.zone h3 { font-size: 1.05rem; font-weight: 700; }
+.eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: .75rem; font-weight: 700; color: var(--z-accent); margin: 0 0 14px; }
+.zone-kids .eyebrow { text-transform: none; letter-spacing: 0; font-size: 1rem; }
+.lead { font-size: 1.12rem; color: var(--dim); max-width: 540px; margin: 0 0 26px; }
+.zone-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+@media (max-width: 860px) { .zone-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+mark { background: none; color: inherit; }
+.zone-students mark { background: linear-gradient(transparent 58%, var(--z-pop) 58%); padding: 0 .08em; }
+.zone-kids mark { color: var(--z-accent); text-decoration: underline wavy var(--z-pop); text-decoration-thickness: 3px; text-underline-offset: 7px; }
+.zone-adults mark { font-style: italic; color: var(--z-pop); }
+
+.points { list-style: none; padding: 0; margin: 30px 0 0; display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+@media (max-width: 560px) { .points { grid-template-columns: 1fr; } }
+.points li { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; background: color-mix(in srgb, #fff 58%, transparent); border: 1px solid var(--z-border); border-radius: var(--radius); font-size: .95rem; }
+.points .ic { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--z-accent); color: #fff; }
+.zone-kids .points .ic { border-radius: 50%; background: var(--z-pop); color: var(--b-ink); }
+.zone-adults .points .ic { background: var(--c-ink); color: var(--z-pop); }
+.points svg { width: 18px; height: 18px; }
+
+.visual { position: relative; justify-self: center; width: 100%; max-width: 440px; }
+.photo-card { border-radius: var(--radius); overflow: hidden; box-shadow: 0 30px 60px rgba(20, 16, 60, .18); background: #fff; }
+.photo-card img { width: 100%; aspect-ratio: 4 / 4.6; object-fit: cover; }
+.zone-students .photo-card { transform: rotate(-3deg); border: 3px solid var(--a-ink); }
+.zone-adults .visual::before { content: ""; position: absolute; inset: 18px -18px -18px 18px; border: 2px solid var(--c-pop); border-radius: var(--radius); }
+.chip { position: absolute; left: -14px; bottom: 26px; background: #fff; color: var(--z-ink); padding: 10px 14px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, .12); font-size: .85rem; font-weight: 700; display: flex; gap: 10px; align-items: center; }
+.zone-students .chip { background: var(--a-pop); color: var(--a-ink); transform: rotate(2deg); border-radius: 8px; }
+.zone-kids .chip { border-radius: 999px; }
+.zone-adults .chip { border-radius: 6px; border: 1px solid var(--c-border); }
+@media (max-width: 480px) { .chip { left: 8px; bottom: 12px; } }
+
+.eq { display: flex; gap: 3px; align-items: flex-end; height: 18px; }
+.eq span { width: 4px; height: 100%; background: currentColor; border-radius: 2px; transform-origin: bottom; animation: eq .9s ease-in-out infinite alternate; }
+.eq span:nth-child(2) { animation-delay: -.3s; } .eq span:nth-child(3) { animation-delay: -.6s; } .eq span:nth-child(4) { animation-delay: -.15s; } .eq span:nth-child(5) { animation-delay: -.45s; }
+@keyframes eq { from { transform: scaleY(.25); } to { transform: scaleY(1); } }
+@media (prefers-reduced-motion: reduce) { .eq span { animation: none; transform: scaleY(.7); } html { scroll-behavior: auto; } }
+
+.kids-scene { width: 100%; height: auto; }
+
+/* ---------- adults: note, credentials + contact ---------- */
+.note { margin: 28px 0 0; padding: 18px 22px; border-left: 3px solid var(--c-pop); background: color-mix(in srgb, #fff 58%, transparent); border-radius: 0 var(--radius) var(--radius) 0; font-style: italic; }
+.note p { margin: 0; }
+.note footer { font-style: normal; font-size: .85rem; color: var(--dim); margin-top: 8px; }
+.creds { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--z-border); display: flex; gap: 24px; flex-wrap: wrap; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+.creds span { display: inline-flex; align-items: center; gap: 8px; }
+.creds svg { width: 16px; height: 16px; color: var(--z-pop); }
+
+.contact-band { margin-top: 72px; background: #0b0f1a; color: #f3ecd9; border-radius: var(--radius); padding: 48px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 36px; align-items: center; border: 1px solid color-mix(in srgb, var(--c-pop) 45%, transparent); box-shadow: 0 24px 60px rgba(15, 23, 41, .25); }
+.contact-band h2 { color: var(--c-pop); }
+.contact-band p { color: #c9c4b4; margin: 0 0 22px; max-width: 520px; }
+.btn-gold { background: var(--c-pop); color: #0b0f1a; }
+.btn-ghost-light { border-color: rgba(243, 236, 217, .4); color: #f3ecd9; }
+.contact-list { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 8px; font-weight: 600; }
+.contact-list a { text-decoration: none; display: inline-flex; gap: 10px; align-items: center; }
+.contact-list svg { width: 18px; height: 18px; opacity: .85; }
+.qr-card { background: #fff; color: #0f1729; border-radius: 12px; padding: 20px; text-align: center; justify-self: center; }
+.qr-card img { width: 160px; height: 160px; margin: 0 auto; }
+.qr-card p { margin: 10px 0 0; font-size: .82rem; color: #4a4f63; font-weight: 600; }
+@media (max-width: 820px) { .contact-band { grid-template-columns: 1fr; padding: 32px 24px; } }
+
+.placeholder { outline: 1.5px dashed var(--pop); outline-offset: 3px; }
+
+.footer { padding: 32px 0 84px; border-top: 1px solid var(--border); font-size: .8rem; color: var(--dim); }
+.footer p { margin: 6px 0; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-coffee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  </defs>
+</svg>
+
+<div class="backdrop" aria-hidden="true"></div>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#students"><span class="brand-mark">♪</span> [Studio Name]</a>
+    <a class="btn btn-primary btn-sm" href="https://wa.me/60000000000" target="_blank" rel="noopener"><svg><use href="#i-chat"/></svg>WhatsApp</a>
+  </div>
+</nav>
+
+<nav class="rail" aria-label="Audience">
+  <a href="#students" data-r="students"><i></i>Teens &amp; students</a>
+  <a href="#kids" data-r="kids"><i></i>Kids</a>
+  <a href="#adults" data-r="adults"><i></i>Adults</a>
+</nav>
+
+<!-- ZONE 1 · teens & students -->
+<section class="zone zone-students" id="students">
+  <div class="container zone-grid">
+    <div>
+      <p class="eyebrow">Teens &amp; students · 13–24</p>
+      <h1>Play the songs you <mark>actually listen to</mark>.</h1>
+      <p class="lead">Pop, film and game soundtracks alongside real technique — and ABRSM or Trinity exam prep whenever you want the certificate to go with it.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://wa.me/60000000000" target="_blank" rel="noopener">Book a trial on WhatsApp</a>
+        <a class="btn btn-ghost" href="#kids">Keep scrolling ↓</a>
+      </div>
+      <ul class="points">
+        <li><span class="ic"><svg><use href="#i-music"/></svg></span><span><strong>Your playlist, on the keys.</strong> Learn pieces you care about, not just the syllabus.</span></li>
+        <li><span class="ic"><svg><use href="#i-award"/></svg></span><span><strong>Exam-ready when you are.</strong> ABRSM and Trinity grades, with a Grade 8 + ATCL teacher.</span></li>
+        <li><span class="ic"><svg><use href="#i-zap"/></svg></span><span><strong>Electone, full-band sound.</strong> Stage-style playing on a Yamaha ELS-02.</span></li>
+        <li><span class="ic"><svg><use href="#i-clock"/></svg></span><span><strong>Slots around school &amp; uni.</strong> <span class="placeholder">[Confirm after-school / weekend times]</span></span></li>
+      </ul>
+    </div>
+    <div class="visual">
+      <div class="photo-card"><img src="../assets/images/electone.jpg" alt="Yamaha Electone ELS-02"></div>
+      <div class="chip"><span class="eq"><span></span><span></span><span></span><span></span><span></span></span>Electone ELS-02 · stage sound</div>
+    </div>
+  </div>
+</section>
+
+<!-- ZONE 2 · young kids -->
+<section class="zone zone-kids" id="kids">
+  <div class="container zone-grid">
+    <div class="visual">
+      <svg class="kids-scene" viewBox="0 0 440 400" role="img" aria-label="A smiling music note surrounded by stars">
+        <rect x="20" y="20" width="400" height="360" rx="64" fill="#ffe3ec"/>
+        <circle cx="330" cy="110" r="72" fill="#7fd6c2" opacity=".55"/>
+        <circle cx="92" cy="300" r="52" fill="#ffd166" opacity=".75"/>
+        <g fill="#ffd166">
+          <path d="M0,-22 L6,-7 L22,-7 L9,3 L14,18 L0,9 L-14,18 L-9,3 L-22,-7 L-6,-7 Z" transform="translate(100 92)"/>
+          <path d="M0,-22 L6,-7 L22,-7 L9,3 L14,18 L0,9 L-14,18 L-9,3 L-22,-7 L-6,-7 Z" transform="translate(362 250) scale(.7)"/>
+          <path d="M0,-22 L6,-7 L22,-7 L9,3 L14,18 L0,9 L-14,18 L-9,3 L-22,-7 L-6,-7 Z" transform="translate(150 330) scale(.5)"/>
+        </g>
+        <g transform="translate(210 232)">
+          <rect x="40" y="-128" width="12" height="138" rx="6" fill="#4a3b33"/>
+          <path d="M52,-128 C96,-118 100,-72 72,-52 C90,-78 74,-100 52,-106 Z" fill="#4a3b33"/>
+          <ellipse cx="10" cy="10" rx="48" ry="38" fill="#ff7aa2" transform="rotate(-18 10 10)"/>
+          <circle cx="-6" cy="2" r="7" fill="#fff"/><circle cx="-4" cy="3" r="3.5" fill="#4a3b33"/>
+          <circle cx="22" cy="2" r="7" fill="#fff"/><circle cx="24" cy="3" r="3.5" fill="#4a3b33"/>
+          <path d="M-4,18 Q9,30 22,18" stroke="#4a3b33" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <circle cx="-20" cy="14" r="5" fill="#ff4f86" opacity=".55"/><circle cx="36" cy="14" r="5" fill="#ff4f86" opacity=".55"/>
+        </g>
+        <text x="140" y="130" font-size="40" fill="#d93d75" font-family="Georgia, serif">♪</text>
+        <text x="296" y="340" font-size="34" fill="#4fb8a2" font-family="Georgia, serif">♫</text>
+      </svg>
+      <div class="chip"><svg width="18" height="18" style="color:#d93d75"><use href="#i-heart"/></svg>Ages 4–12 · parents welcome</div>
+    </div>
+    <div>
+      <p class="eyebrow">Little beginners · ages 4–12</p>
+      <h1>First notes, <mark>made fun</mark>.</h1>
+      <p class="lead">Short, playful lessons that still build real skills — rhythm games, singing, and a tiny win every week. Parents are welcome to sit in.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://wa.me/60000000000" target="_blank" rel="noopener">Ask about a trial lesson</a>
+      </div>
+      <ul class="points">
+        <li><span class="ic"><svg><use href="#i-star"/></svg></span><span><strong>Play first, theory gently.</strong> Games and songs before worksheets.</span></li>
+        <li><span class="ic"><svg><use href="#i-heart"/></svg></span><span><strong>20 years with young learners,</strong> including years at Yamaha Music School.</span></li>
+        <li><span class="ic"><svg><use href="#i-award"/></svg></span><span><strong>A gentle path to graded exams</strong> when they're ready — never before.</span></li>
+        <li><span class="ic"><svg><use href="#i-users"/></svg></span><span><strong>Relaxed trial lesson</strong> to see if it clicks — no pressure either way.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ZONE 3 · working adults -->
+<section class="zone zone-adults" id="adults">
+  <div class="container">
+    <div class="zone-grid">
+      <div>
+        <p class="eyebrow">Adults &amp; returning players</p>
+        <h1>It's never too late to begin — <mark>or to come back</mark>.</h1>
+        <p class="lead">Structured, unhurried lessons for adult beginners and returners, taught on a Yamaha Clavinova. Progress you can hear, on a schedule that respects your week.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#contact">Arrange a first lesson</a>
+        </div>
+        <ul class="points">
+          <li><span class="ic"><svg><use href="#i-coffee"/></svg></span><span><strong>Adult beginners welcome.</strong> Clear steps, no jargon, no rush.</span></li>
+          <li><span class="ic"><svg><use href="#i-music"/></svg></span><span><strong>Returning after years away?</strong> We rebuild technique gently and pick repertoire you'll enjoy.</span></li>
+          <li><span class="ic"><svg><use href="#i-award"/></svg></span><span><strong>ABRSM Grade 8 · ATCL Diploma.</strong> 20 years of teaching experience.</span></li>
+          <li><span class="ic"><svg><use href="#i-clock"/></svg></span><span><strong>Evening &amp; weekend slots.</strong> <span class="placeholder">[Confirm availability]</span></span></li>
+        </ul>
+        <blockquote class="note">
+          <p class="placeholder">"[A short note in the teacher's own words — why she still teaches after twenty years, and what a student can honestly expect from her. Two or three sentences.]"</p>
+          <footer>— [Wife's Name] · ABRSM Grade 8 · ATCL Diploma</footer>
+        </blockquote>
+        <div class="creds">
+          <span><svg><use href="#i-award"/></svg>ABRSM</span>
+          <span><svg><use href="#i-award"/></svg>Trinity College London</span>
+          <span><svg><use href="#i-music"/></svg>Yamaha Music School</span>
+        </div>
+      </div>
+      <div class="visual">
+        <div class="photo-card"><img src="../assets/images/clavinova.jpg" alt="White Yamaha Clavinova CLP digital piano, close up"></div>
+        <div class="chip"><svg width="18" height="18" style="color:#c9a24b"><use href="#i-music"/></svg>Yamaha Clavinova CLP</div>
+      </div>
+    </div>
+
+    <div class="contact-band" id="contact">
+      <div>
+        <h2>Let's talk about your goals.</h2>
+        <p>Message on WhatsApp with a line about yourself — beginner, returning, or exam-bound — and we'll find a slot that fits.</p>
+        <div class="btn-row">
+          <a class="btn btn-gold" href="https://wa.me/60000000000" target="_blank" rel="noopener"><svg><use href="#i-chat"/></svg>Chat on WhatsApp</a>
+          <a class="btn btn-ghost-light" href="mailto:hello@example.com"><svg><use href="#i-mail"/></svg>Email</a>
+        </div>
+        <ul class="contact-list">
+          <li><a class="placeholder" href="tel:+60000000000"><svg><use href="#i-phone"/></svg>+60 00-000 0000</a></li>
+          <li><a class="placeholder" href="mailto:hello@example.com"><svg><use href="#i-mail"/></svg>hello@example.com</a></li>
+        </ul>
+      </div>
+      <div class="qr-card">
+        <img src="../assets/qr/whatsapp-qr.png" alt="Scan to WhatsApp" onerror="this.style.opacity=0.3">
+        <p>Scan to chat on WhatsApp</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>© <span id="year"></span> [Studio Name]. Concept A of 3 — <a href="index.html">back to the concept index</a>.</p>
+    <p>Photos: piano keys by <a href="https://unsplash.com/photos/jqvpD7xwLns" target="_blank" rel="noopener">Parvez AzarQaderi</a> (Unsplash) · Electone ELS-02C by <a href="https://commons.wikimedia.org/wiki/File:ELS-02C_Stagea_(2014).jpg" target="_blank" rel="noopener">Mintos 23</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> (cropped).</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var root = document.documentElement;
+  var zones = [document.getElementById('students'), document.getElementById('kids'), document.getElementById('adults')];
+  var names = ['students', 'kids', 'adults'];
+  var ticking = false;
+
+  function smooth(x) { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); }
+
+  // Progress into a zone: 0 while its top is below 85% of the viewport, 1 once it reaches 25%.
+  function progress(el) {
+    var vh = window.innerHeight;
+    var top = el.getBoundingClientRect().top;
+    return smooth((0.85 * vh - top) / (0.6 * vh));
+  }
+
+  function update() {
+    ticking = false;
+    var t1 = progress(zones[1]);
+    var t2 = progress(zones[2]);
+    root.style.setProperty('--p1', (t1 * 100).toFixed(1) + '%');
+    root.style.setProperty('--p2', (t2 * 100).toFixed(1) + '%');
+    var zone = t2 > 0.5 ? names[2] : t1 > 0.5 ? names[1] : names[0];
+    if (root.dataset.zone !== zone) root.dataset.zone = zone;
+  }
+
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+</script>
+
+</body>
+</html>

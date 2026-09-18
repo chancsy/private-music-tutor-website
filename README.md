@@ -97,6 +97,22 @@ then visit `http://localhost:8000`.
    dark page prints as white.
 3. Check the print preview shows one full page with no content cut off before saving.
 
+## Scroll-transition concepts (`concepts/`)
+
+Three self-contained explorations of a single page whose look shifts as you scroll — teens &
+students at the top, young children in the middle, working adults at the bottom. Same content in
+each; the difference is *how* the page transitions. Start at `concepts/index.html`.
+
+- `concepts/scroll-morph.html` — **Morph.** Colours, blobs and typography interpolate continuously
+  with scroll position (JS sets two mix percentages; CSS `color-mix()` blends). Light throughout.
+- `concepts/scroll-chapters.html` — **Chapters.** Three full-screen snap chapters; the backdrop
+  crossfades dark indigo → pastel → dark gold. The most dramatic.
+- `concepts/scroll-stage.html` — **Stage.** A pinned illustrated keyboard swaps props and colours
+  as the audience panels scroll past; becomes a compact sticky strip on phones.
+
+They share the main site's photos and QR code but none of its CSS, so they can be deleted or
+promoted without touching `index.html`. All kids-zone artwork is original SVG.
+
 ## Hosting
 
 Not decided yet. These are plain static files, so they'll work on GitHub Pages, Netlify,
