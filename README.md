@@ -113,6 +113,29 @@ each; the difference is *how* the page transitions. Start at `concepts/index.htm
 They share the main site's photos and QR code but none of its CSS, so they can be deleted or
 promoted without touching `index.html`. All kids-zone artwork is original SVG.
 
+### Video-led concepts (`concepts/video-*.html`)
+
+A second round with far fewer words, built around performance video:
+
+- `concepts/video-reel.html` — **Reel.** Three full-screen video scenes that stack as you scroll.
+- `concepts/video-stage.html` — **Stage, video edition.** A pinned player that switches clips per audience.
+- `concepts/video-quiet.html` — **Quiet.** One hero video, credentials, three audience cards, a note, contact.
+
+Videos are **YouTube embeds** driven by `concepts/yt-scroll.js` (YouTube IFrame API, privacy-enhanced
+`youtube-nocookie.com` host). Each player starts **muted** when its section scrolls into view and
+pauses when it leaves — browsers only allow un-gestured autoplay when muted — and every page has a
+"Sound off/on" toggle. Users who prefer reduced motion get normal controls instead of autoplay.
+
+The clip currently embedded is 826aska's YOASOBI「勇者」Electone cover (`SXF8kXsjquA`), credited
+on each page as an example of the instrument, entered at a different point per audience. It is the
+one 826aska YOASOBI cover that allows embedded playback — 夜に駆ける, アイドル and 祝福 return
+player error 150 (the rights holder blocks playback on other sites), so they can only be linked.
+Any video you pick gets the same check: open the page and look for a `yt-scroll.js` warning in the
+browser console. To use your own footage, upload it to YouTube (**unlisted** is fine — it won't
+appear in search or on your channel page) and change the IDs and `start` seconds in the `VIDEOS`
+block at the bottom of each page. Landscape 16:9 works best; keep the first few seconds visually
+interesting, since the hero and scene videos are cropped to fill the screen.
+
 ## Hosting
 
 Not decided yet. These are plain static files, so they'll work on GitHub Pages, Netlify,

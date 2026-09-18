@@ -27,10 +27,37 @@ a.card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(15, 23,
 </head>
 <body>
 <div class="container">
-  <p class="tag">Feature branch · scroll-theme-transition</p>
+  <p class="tag">Feature branch · video-concepts</p>
   <h1>One page, three audiences.</h1>
-  <p class="lead">Three explorations of a single page whose look shifts as you scroll — teens &amp; students at the top, young children in the middle, working adults at the bottom. Same content in each; the difference is <em>how</em> the page transitions. Open one and scroll slowly.</p>
+  <p class="lead">Explorations of a single page for three audiences — teens &amp; students, young children, working adults. The second round is video-led with far fewer words; the first round explores how a page can transition between looks as you scroll. Open one and scroll slowly.</p>
 
+  <h2 style="font-size:1.2rem;margin:0 0 14px">Round 2 · video-led, few words</h2>
+  <p class="lead" style="margin-bottom:22px;font-size:.95rem">Performance clips are YouTube embeds (826aska's YOASOBI「勇者」Electone cover, credited on each page as an example of the instrument — her other YOASOBI covers block embedded playback) that <strong>play muted as their section scrolls into view</strong> and pause when it leaves, with a sound toggle. Her own clips can be unlisted YouTube uploads — swap the IDs in each page's <code>VIDEOS</code> block.</p>
+  <div class="grid" style="margin-bottom:44px">
+    <a class="card" href="video-reel.html">
+      <div class="strip"><span style="background:#000"></span><span style="background:#c8ff3d"></span><span style="background:#000"></span><span style="background:#ff7aa2"></span><span style="background:#000"></span><span style="background:#c9a24b"></span></div>
+      <span class="tag">Concept D</span>
+      <h2>Reel</h2>
+      <p>Three full-screen video scenes that stack like cards as you scroll — each with five words, one line and one button. The most cinematic.</p>
+      <div class="how">Sticky-stacked scenes; only the scene that has risen past the middle of the screen plays.</div>
+    </a>
+    <a class="card" href="video-stage.html">
+      <div class="strip"><span style="background:#f3f1ff"></span><span style="background:#6d3df2"></span><span style="background:#fff5ea"></span><span style="background:#d93d75"></span><span style="background:#f7f3e9"></span><span style="background:#0f1729"></span></div>
+      <span class="tag">Concept E</span>
+      <h2>Stage, video edition</h2>
+      <p>Concept C's pinned stage, but the stage is a video player: the clip and the colours switch for each audience as the short panels scroll past.</p>
+      <div class="how">Sticky column + IntersectionObserver; one player, three clips.</div>
+    </a>
+    <a class="card" href="video-quiet.html">
+      <div class="strip"><span style="background:#0b0f1a"></span><span style="background:#c9a24b"></span><span style="background:#f7f3e9"></span><span style="background:#fff"></span><span style="background:#0b0f1a"></span><span style="background:#e2c77d"></span></div>
+      <span class="tag">Concept F</span>
+      <h2>Quiet</h2>
+      <p>No scroll tricks. One full-screen performance video, her name and credentials, three short audience cards with clips, a note in her own words, contact. The most professional.</p>
+      <div class="how">Classic/Dark Gold palette; the fewest words of all six.</div>
+    </a>
+  </div>
+
+  <h2 style="font-size:1.2rem;margin:0 0 14px">Round 1 · scroll transitions</h2>
   <div class="grid">
     <a class="card" href="scroll-morph.html">
       <div class="strip"><span style="background:#6d3df2"></span><span style="background:#c8ff3d"></span><span style="background:#ff7aa2"></span><span style="background:#7fd6c2"></span><span style="background:#0f1729"></span><span style="background:#c9a24b"></span></div>

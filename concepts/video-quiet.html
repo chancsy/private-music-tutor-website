@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept F · Quiet — [Studio Name] Piano Studio</title>
+<meta name="description" content="Video concept F: a calm, professional single page — one performance video, her name and credentials, three short audience cards, a note in her own words, and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #f7f3e9; --ink: #0f1729; --dim: #4a4f63; --gold: #c9a24b; --gold-2: #e2c77d; --navy: #0b0f1a; --border: #e4dcc8; --surface: #fff; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Inter", system-ui, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; line-height: 1.1; margin: 0 0 .4em; letter-spacing: -.01em; }
+h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
+h3 { font-size: 1.15rem; }
+
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 40; color: #fff; transition: background-color .4s, color .4s, border-color .4s; border-bottom: 1px solid transparent; }
+.nav.solid { background: color-mix(in srgb, var(--bg) 84%, transparent); color: var(--ink); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--border); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-family: "Playfair Display", Georgia, serif; font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+.brand-mark { width: 32px; height: 32px; border-radius: 10px; background: var(--gold); color: var(--navy); display: grid; place-items: center; font-family: "Inter", sans-serif; }
+.nav-links { display: flex; gap: 24px; font-size: .9rem; font-weight: 600; }
+.nav-links a { text-decoration: none; opacity: .85; }
+@media (max-width: 760px) { .nav-links { display: none; } }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 999px; font-weight: 700; font-size: .95rem; text-decoration: none; border: 1.5px solid transparent; transition: transform .15s; }
+.btn:hover { transform: translateY(-1px); }
+.btn-gold { background: var(--gold); color: var(--navy); }
+.btn-ghost-light { border-color: rgba(255, 255, 255, .5); color: #fff; }
+.btn-ghost { border-color: var(--border); color: var(--ink); }
+.btn-sm { padding: 9px 16px; font-size: .86rem; }
+.btn svg { width: 18px; height: 18px; }
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* ---------- hero: one performance video ---------- */
+.hero { position: relative; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; display: grid; place-items: center; text-align: center; color: #fff; background: var(--navy); }
+.yt-bg { position: absolute; inset: 0; background: #000 center / cover no-repeat; }
+.yt-bg iframe, .yt-bg > div { position: absolute; top: 50%; left: 50%; width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.78vh; transform: translate(-50%, -50%); pointer-events: none; border: 0; }
+.scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11, 15, 26, .55) 0%, rgba(11, 15, 26, .35) 45%, rgba(11, 15, 26, .8) 100%); }
+.hero-copy { position: relative; max-width: 760px; padding: 0 24px; }
+.eyebrow { text-transform: uppercase; letter-spacing: .2em; font-size: .74rem; font-weight: 700; color: var(--gold-2); margin: 0 0 16px; }
+.hero h1 { font-size: clamp(2.8rem, 8vw, 6rem); font-weight: 600; margin: 0 0 .2em; text-shadow: 0 2px 30px rgba(0, 0, 0, .4); }
+.hero p { font-size: clamp(1rem, 1.7vw, 1.25rem); margin: 0 auto 26px; color: rgba(255, 255, 255, .9); max-width: 520px; }
+.credit { position: absolute; right: 20px; bottom: 16px; font-size: .7rem; color: rgba(255, 255, 255, .7); text-align: right; max-width: 60%; }
+.sound { position: absolute; left: 20px; bottom: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: rgba(0, 0, 0, .5); color: #fff; border: 1px solid rgba(255, 255, 255, .3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font: 600 .8rem/1 "Inter", system-ui, sans-serif; cursor: pointer; }
+.sound svg { width: 16px; height: 16px; }
+html[data-sound="on"] .sound .off, html[data-sound="off"] .sound .on { display: none; }
+@media (max-width: 760px) { .credit { bottom: 60px; right: 16px; max-width: 75%; } }
+
+section { padding: 88px 0; }
+.section-head { text-align: center; max-width: 560px; margin: 0 auto 40px; }
+.section-head p { color: var(--dim); margin: 0; }
+
+/* ---------- who I teach ---------- */
+.cards { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.card .yt { position: relative; aspect-ratio: 16 / 9; background: #000 center / cover no-repeat; }
+.card .yt iframe, .card .yt > div { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.card-body { padding: 20px 22px 22px; }
+.card-body p { margin: 0 0 14px; color: var(--dim); font-size: .95rem; }
+.card-body a { font-weight: 700; text-decoration: none; color: var(--ink); border-bottom: 2px solid var(--gold); }
+
+/* ---------- in her words ---------- */
+.words { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.words-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: center; }
+@media (max-width: 860px) { .words-grid { grid-template-columns: 1fr; gap: 32px; } }
+.portrait { aspect-ratio: 4 / 5; border-radius: 14px; background: var(--bg); border: 1.5px dashed var(--gold); display: grid; place-items: center; color: var(--dim); font-size: .9rem; text-align: center; padding: 20px; }
+blockquote.note { margin: 0; font-family: "Playfair Display", Georgia, serif; font-style: italic; font-size: clamp(1.3rem, 2.4vw, 1.8rem); line-height: 1.4; color: var(--ink); }
+blockquote.note footer { font-family: "Inter", system-ui, sans-serif; font-style: normal; font-size: .9rem; color: var(--dim); margin-top: 18px; }
+.creds { margin-top: 28px; display: flex; gap: 22px; flex-wrap: wrap; font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+.creds span { display: inline-flex; align-items: center; gap: 8px; }
+.creds svg { width: 16px; height: 16px; color: var(--gold); }
+
+/* ---------- contact ---------- */
+.band { background: var(--navy); color: #f3ecd9; border-radius: 18px; padding: 52px 48px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 36px; align-items: center; border: 1px solid rgba(201, 162, 75, .45); box-shadow: 0 24px 60px rgba(15, 23, 41, .25); }
+@media (max-width: 820px) { .band { grid-template-columns: 1fr; padding: 32px 24px; } }
+.band h2 { color: var(--gold-2); }
+.band p { margin: 0 0 22px; color: #c9c4b4; max-width: 460px; }
+.band .btn-row { justify-content: flex-start; }
+.contact-list { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 8px; font-weight: 600; }
+.contact-list a { text-decoration: none; display: inline-flex; gap: 10px; align-items: center; }
+.contact-list svg { width: 18px; height: 18px; opacity: .85; }
+.qr-card { background: #fff; color: var(--ink); border-radius: 12px; padding: 18px; text-align: center; justify-self: center; }
+.qr-card img { width: 150px; height: 150px; margin: 0 auto; }
+.qr-card p { margin: 8px 0 0; font-size: .8rem; color: var(--dim); font-weight: 600; }
+
+.placeholder { outline: 1.5px dashed var(--gold); outline-offset: 3px; }
+.footer { padding: 28px 0 40px; border-top: 1px solid var(--border); font-size: .78rem; color: var(--dim); }
+.footer p { margin: 6px 0; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+    <symbol id="i-vol-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></symbol>
+    <symbol id="i-vol-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></symbol>
+  </defs>
+</svg>
+
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top"><span class="brand-mark">♪</span> [Studio Name]</a>
+    <div class="nav-links">
+      <a href="#who">Who I teach</a>
+      <a href="#words">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="btn btn-gold btn-sm" href="https://wa.me/60000000000" target="_blank" rel="noopener"><svg><use href="#i-chat"/></svg>WhatsApp</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="yt-bg" id="hero-yt" aria-hidden="true"></div>
+  <div class="scrim"></div>
+  <div class="hero-copy">
+    <p class="eyebrow">Piano &amp; Electone lessons · <span class="placeholder">[Township]</span></p>
+    <h1>[Wife's Name]</h1>
+    <p>Twenty years of teaching. ABRSM Grade 8 · ATCL Diploma.</p>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://wa.me/60000000000" target="_blank" rel="noopener"><svg><use href="#i-chat"/></svg>Message on WhatsApp</a>
+      <a class="btn btn-ghost-light" href="#who">Who I teach ↓</a>
+    </div>
+  </div>
+  <button class="sound" type="button" data-sound-toggle aria-label="Toggle sound">
+    <span class="off"><svg><use href="#i-vol-off"/></svg></span><span class="on"><svg><use href="#i-vol-on"/></svg></span>
+    <span class="off">Sound off</span><span class="on">Sound on</span>
+  </button>
+  <p class="credit">Electone: <a href="https://www.youtube.com/watch?v=SXF8kXsjquA" target="_blank" rel="noopener">826aska — YOASOBI「勇者」</a> (YouTube), shown as an example of the instrument</p>
+</header>
+
+<section id="who">
+  <div class="container">
+    <div class="section-head">
+      <h2>Who I teach</h2>
+      <p>Every lesson is planned around the person at the keyboard.</p>
+    </div>
+    <div class="cards">
+      <div class="card" data-zone="kids">
+        <div class="yt" data-video="kids"></div>
+        <div class="card-body"><h3>Children, 4–12</h3><p>Playful first lessons. Parents welcome.</p><a href="#contact">Ask about a trial</a></div>
+      </div>
+      <div class="card" data-zone="students">
+        <div class="yt" data-video="students"></div>
+        <div class="card-body"><h3>Teens &amp; students</h3><p>Pop and anime on a real Electone. Exams when you want them.</p><a href="#contact">Book a trial</a></div>
+      </div>
+      <div class="card" data-zone="adults">
+        <div class="yt" data-video="adults"></div>
+        <div class="card-body"><h3>Adults &amp; returners</h3><p>Unhurried lessons, evenings and weekends.</p><a href="#contact">Arrange a first lesson</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="words" id="words">
+  <div class="container words-grid">
+    <div class="portrait">Add photo:<br><code>assets/images/portrait.jpg</code></div>
+    <div>
+      <blockquote class="note">
+        <p class="placeholder">"[Two or three sentences in the teacher's own words — why she still teaches after twenty years, and what a student can honestly expect from her.]"</p>
+        <footer>— [Wife's Name]</footer>
+      </blockquote>
+      <div class="creds">
+        <span><svg><use href="#i-award"/></svg>ABRSM Grade 8</span>
+        <span><svg><use href="#i-award"/></svg>ATCL Diploma</span>
+        <span><svg><use href="#i-music"/></svg>20 years teaching</span>
+        <span><svg><use href="#i-music"/></svg>Yamaha Music School</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="band">
+      <div>
+        <h2>Say hello.</h2>
+        <p>One message is all it takes — tell us who's learning.</p>
+        <div class="btn-row">
+          <a class="btn btn-gold" href="https://wa.me/60000000000" target="_blank" rel="noopener"><svg><use href="#i-chat"/></svg>Chat on WhatsApp</a>
+          <a class="btn btn-ghost-light" href="mailto:hello@example.com"><svg><use href="#i-mail"/></svg>Email</a>
+        </div>
+        <ul class="contact-list">
+          <li><a class="placeholder" href="tel:+60000000000"><svg><use href="#i-phone"/></svg>+60 00-000 0000</a></li>
+          <li><a class="placeholder" href="mailto:hello@example.com"><svg><use href="#i-mail"/></svg>hello@example.com</a></li>
+        </ul>
+      </div>
+      <div class="qr-card"><img src="../assets/qr/whatsapp-qr.png" alt="Scan to WhatsApp" onerror="this.style.opacity=0.3"><p>Scan to chat on WhatsApp</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>© <span id="year"></span> [Studio Name]. Concept F — <a href="index.html">concept index</a>.</p>
+    <p>Videos are YouTube embeds by <a href="https://www.youtube.com/@826aska" target="_blank" rel="noopener">826aska</a>, used as examples of the instrument; replace the IDs in this page's VIDEOS block with your own uploads.</p>
+  </div>
+</footer>
+
+<script src="yt-scroll.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Swap for her own uploads (unlisted YouTube videos work). One clip for now — 826aska's YOASOBI「勇者」—
+  // entered at a different point per card. (Her other YOASOBI covers block embedded playback: error 150.)
+  var VIDEOS = {
+    hero:     { id: 'SXF8kXsjquA', start: 0 },
+    kids:     { id: 'SXF8kXsjquA', start: 48 },
+    students: { id: 'SXF8kXsjquA', start: 20 },
+    adults:   { id: 'SXF8kXsjquA', start: 96 }
+  };
+
+  var nav = document.getElementById('nav');
+  function onScroll() { nav.classList.toggle('solid', window.scrollY > window.innerHeight - 80); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var hero = YTScroll.create(document.getElementById('hero-yt'), VIDEOS.hero.id, { start: VIDEOS.hero.start });
+  YTScroll.play(hero);
+
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.card .yt'));
+  var cardPlayers = cards.map(function (el) { var v = VIDEOS[el.dataset.video]; return YTScroll.create(el, v.id, { controls: true, start: v.start }); });
+
+  // Hero plays while it is on screen; each card plays (muted) while most of it is on screen.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { e.isIntersecting ? YTScroll.play(hero) : YTScroll.pause(hero); });
+    }, { threshold: 0.2 }).observe(document.getElementById('top'));
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var p = cardPlayers[cards.indexOf(e.target)];
+        e.isIntersecting ? YTScroll.play(p) : YTScroll.pause(p);
+      });
+    }, { threshold: 0.6 });
+    cards.forEach(function (c) { io.observe(c); });
+  }
+</script>
+
+</body>
+</html>
